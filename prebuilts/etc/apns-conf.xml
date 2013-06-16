@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+** Copyright 2012, Cyanogenmod
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<!-- use empty string to specify no proxy or port -->
+<!-- This version must agree with that in apps/common/res/apns.xml -->
+<apns count="3">
+  <apn name="INTERNET" numeric="311660" mcc="311" mnc="660" apn="internet.metropcs" user="" server="" password="" proxy="" port="" mmsproxy="" mmsport="" mmsprotocol="null" mmsc="" type="default,supl" />
+  <apn name="MMS" numeric="311660" mcc="311" mnc="660" apn="internet.metropcs" user="" server="" password="" proxy="metropcs.net" port="3128" mmsproxy="metropcs.net" mmsport="3128" mmsprotocol="null" mmsc="http://mms.metropcs.net:3128/mmsc" type="mms" />
+  <apn name="IMSIODT" numeric="311660" mcc="311" mnc="660" apn="imsiodt.metropcs" user="" server="" password="" proxy="" port="" mmsproxy="" mmsport="" mmsprotocol="null" mmsc="" type="ims" />
+</apns>

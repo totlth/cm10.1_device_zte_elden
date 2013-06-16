@@ -2,7 +2,6 @@
 # system.prop for elden
 #
 
-
 rild.libpath=/system/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 persist.rild.nitz_plmn=

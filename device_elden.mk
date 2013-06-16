@@ -28,8 +28,8 @@ PRODUCT_COPY_FILES += \
 
 ## Ramdisk
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/ramdisk/init.rc:root/init.rc \
         $(LOCAL_PATH)/ramdisk/init.2ndstg.rc:root/init.2ndstg.rc \
+        $(LOCAL_PATH)/ramdisk/init.elden.rc:root/init.elden.rc \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \
@@ -64,6 +64,10 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
 	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 
+# APN
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/prebuilts/etc/apns-conf.xml:system/etc/apns-conf.xml	
+
 # Audio
 PRODUCT_PACKAGES += \
 	alsa.msm8960 \
@@ -74,17 +78,47 @@ PRODUCT_PACKAGES += \
         libaudioparameter \
         libaudioutils
 
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/prebuilts/lib/libacdbloader.so:system/lib/libacdbloader.so \
+	$(LOCAL_PATH)/prebuilts/lib/libalsautils.so:system/lib/libalsautils.so \
+	$(LOCAL_PATH)/prebuilts/lib/libaudcal.so:system/lib/libaudcal.so \
+	$(LOCAL_PATH)/prebuilts/lib/libaudioalsa.so:system/lib/libaudioalsa.so
+
 # Bluetooth
-PRODUCT_PACKAGES += \
-	hciattach \
-	hciconfig \
-	hcitool
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/prebuilts/bin/bluetoothd:system/bin/bluetoothd \
+	$(LOCAL_PATH)/prebuilts/bin/bt_ssp_debug_mode.sh:system/bin/bt_ssp_debug_mode.sh \
+	$(LOCAL_PATH)/prebuilts/bin/bt_testmode.sh:system/bin/bt_testmode.sh \
+	$(LOCAL_PATH)/prebuilts/bin/bt_testmode_new.sh:system/bin/bt_testmode_new.sh \
+	$(LOCAL_PATH)/prebuilts/bin/btnvtool:system/bin/btnvtool \
+ 	$(LOCAL_PATH)/prebuilts/bin/hciattach:system/bin/hciattach \
+	$(LOCAL_PATH)/prebuilts/bin/hci_qcomm_init:system/bin/hci_qcomm_init \
+ 	$(LOCAL_PATH)/prebuilts/bin/hciconfig:system/bin/hciconfig \
+	$(LOCAL_PATH)/prebuilts/bin/hcitool:system/bin/hcitool \
+	$(LOCAL_PATH)/prebuilts/bin/init.btprop.sh:system/bin/init.btprop.sh \
+	$(LOCAL_PATH)/prebuilts/etc/bluetooth/audio.conf:system/etc/bluetooth/audio.conf \
+	$(LOCAL_PATH)/prebuilts/etc/bluetooth/auto_pairing.conf:system/etc/bluetooth/auto_pairing.conf \
+	$(LOCAL_PATH)/prebuilts/etc/bluetooth/blacklist.conf:system/etc/bluetooth/blacklist.conf \
+	$(LOCAL_PATH)/prebuilts/etc/bluetooth/input.conf:system/etc/bluetooth/input.conf \
+	$(LOCAL_PATH)/prebuilts/etc/bluetooth/main.conf:system/etc/bluetooth/main.conf \
+	$(LOCAL_PATH)/prebuilts/etc/bluetooth/network.conf:system/etc/bluetooth/network.conf \
+	$(LOCAL_PATH)/prebuilts/lib/libbluedroid.so:system/lib/libbluedroid.so \
+	$(LOCAL_PATH)/prebuilts/lib/libbluetooth.so:system/lib/libbluetooth.so \
+	$(LOCAL_PATH)/prebuilts/lib/libbluetoothd.so:system/lib/libbluetoothd.so \
+	$(LOCAL_PATH)/prebuilts/lib/libbtio.so:system/lib/libbtio.so
 
 # Camera
 PRODUCT_PACKAGES += \
 	camera.msm8960 \
 	libcameraservice \
 	libcamera_client
+
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/bin/mm-qcamera-daemon:system/bin/mm-qcamera-daemon \
+        $(LOCAL_PATH)/prebuilts/bin/mm-qcamera-test:system/bin/mm-qcamera-test \
+        $(LOCAL_PATH)/prebuilts//bin/mm-qcamera-testsuite-client:system/bin/mm-qcamera-testsuite-client \
+        $(LOCAL_PATH)/prebuilts/bin/v4l2-qcamera-app:system/bin/v4l2-qcamera-app \
+        $(LOCAL_PATH)/prebuilts/lib/liboemcamera.so:system/lib/liboemcamera.so
 
 # Display Firmware
 PRODUCT_COPY_FILES += \
@@ -120,6 +154,10 @@ PRODUCT_PACKAGES += \
         libmemalloc \
         liboverlay
 
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/prebuilts/lib/libI420colorconvert.so:system/lib/libI420colorconvert.so \
+	$(LOCAL_PATH)/prebuilts/lib/libtilerenderer.so:system/lib/libtilerenderer.so
+
 # Filesystem management tools
 PRODUCT_PACKAGES += \
         make_ext4fs \
@@ -128,21 +166,38 @@ PRODUCT_PACKAGES += \
 #GPS
 PRODUCT_PACKAGES += \
         gps.default \
-        libgps \
         libgps.utils \
         libloc_adapter \
-	libloc_api_v02 \
         libloc_eng
 
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/etc/gps.conf:system/etc/gps.conf \
+        $(LOCAL_PATH)/prebuilts/lib/libgps.so:system/lib/libgps.so \
+        $(LOCAL_PATH)/prebuilts/lib/libloc_api_v02.so:system/lib/libloc_api_v02.so \
+        $(LOCAL_PATH)/prebuilts/lib/libloc_ext.so:system/lib/libloc_ext.so
+
 # HDMI
-PRODUCT_PACKAGES += \
-	hdmid
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/bin/hdmid:system/bin/hdmid
+
+# Keyboard/Touchscreen
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/usr/keychars/qwerty.kcm:system/usr/keychars/qwerty.kcm \
+        $(LOCAL_PATH)/prebuilts/usr/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm \
+        $(LOCAL_PATH)/prebuilts/usr/keylayout/atmel-touchscreen.kl:system/usr/keylayout/atmel-touchscreen.kl \
+        $(LOCAL_PATH)/prebuilts/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+        $(LOCAL_PATH)/prebuilts/usr/keylayout/Fts-touchscreen.kl:system/usr/keylayout/Fts-touchscreen.kl \
+        $(LOCAL_PATH)/prebuilts/usr/keylayout/keypad_8960.kl:system/usr/keylayout/keypad_8960.kl \
+        $(LOCAL_PATH)/prebuilts/usr/keylayout/msm8960-snd-card_Button_Jack.kl:system/usr/keylayout/msm8960-snd-card_Button_Jack.kl \
+        $(LOCAL_PATH)/prebuilts/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+        $(LOCAL_PATH)/prebuilts/usr/keylayout/syna-touchscreen.kl:system/usr/keylayout/syna-touchscreen.kl \
+	$(LOCAL_PATH)/prebuilts/usr/idc/Fts-touchscreen.idc:system/usr/idc/Fts-touchscreen.idc
 
 # Lights
 PRODUCT_PACKAGES += \
         lights.msm8960
 
-# OMX
+# Media/OMX
 PRODUCT_PACKAGES += \
         libdivxdrmdecrypt \
         libmm-omxcore \
@@ -154,17 +209,72 @@ PRODUCT_PACKAGES += \
         libOmxVdec \
         libOmxVenc \
         libstagefrighthw \
+	mm-aenc-omxaac-test \
+	mm-aenc-omxamr-test \
+	mm-aenc-omxevrc-test \
+	mm-aenc-omxqcelp13-test \
         mm-vdec-omx-test \
         mm-venc-omx-test720p \
         mm-video-driver-test \
         mm-video-encdrv-test
 
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/etc/media_codecs.xml:system/etc/media_codecs.xml \
+        $(LOCAL_PATH)/prebuilts/etc/media_profiles.xml:system/etc/media_profiles.xml
+
+# Misc (for now)
+PRODUCT_PACKAGES += \
+	applypatch \
+	applypatch_static \
+	badblocks \
+	check_prereq \
+	libwebcore \
+	libxml2
+
+# nfc
+PRODUCT_PACKAGES += \
+	libnfc \
+        com.android.nfc_extras
+
 # Power
 
+# Qcom init scripts & softap
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
+        $(LOCAL_PATH)/prebuilts/etc/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
+        $(LOCAL_PATH)/prebuilts/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+        $(LOCAL_PATH)/prebuilts/etc/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
+        $(LOCAL_PATH)/prebuilts/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
+        $(LOCAL_PATH)/prebuilts/etc/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
+        $(LOCAL_PATH)/prebuilts/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
+
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/etc/qcom/softap/hostapd_default.conf:system/etc/qcom/softap/hostapd_default.conf \
+        $(LOCAL_PATH)/prebuilts/lib/libQWiFiSoftApCfg.so:system/lib/libQWiFiSoftApCfg.so
+
 # Sensors
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/lib/hw/sensors.goldfish.so:system/lib/hw/sensors.goldfish.so \
+        $(LOCAL_PATH)/prebuilts/lib/hw/sensors.msm8960.so:system/lib/hw/sensors.msm8960.so
 
 # Wifi
-# Kernel module (this does not get built with kernel source)
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/bin/hostapd:system/bin/hostapd \
+        $(LOCAL_PATH)/prebuilts/bin/hostapd_cli:system/bin/hostapd_cli \
+        $(LOCAL_PATH)/prebuilts/bin/wiperiface_v02:system/bin/wiperiface_v02 \
+        $(LOCAL_PATH)/prebuilts/bin/wpa_cli:system/bin/wpa_cli \
+        $(LOCAL_PATH)/prebuilts/bin/wpa_supplicant:system/bin/wpa_supplicant \
+        $(LOCAL_PATH)/prebuilts/etc/init.wlanprop.sh:system/etc/init.wlanprop.sh \
+        $(LOCAL_PATH)/prebuilts/etc/wiperconfig.xml:system/etc/wiperconfig.xml \
+        $(LOCAL_PATH)/prebuilts/etc/firmware/wlan/prima/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+        $(LOCAL_PATH)/prebuilts/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
+        $(LOCAL_PATH)/prebuilts/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
+        $(LOCAL_PATH)/prebuilts/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+        $(LOCAL_PATH)/prebuilts/etc/wifi/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
+        $(LOCAL_PATH)/prebuilts/lib/libwiperjni_v02.so:system/lib/libwiperjni_v02.so \
+        $(LOCAL_PATH)/prebuilts/lib/libwpa_client.so:system/lib/libwpa_client.so
+
+## Wifi kernel module (this does not get built with kernel source)
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/lib/modules/prima/prima_wlan.ko:system/lib/modules/prima/prima_wlan.ko
 
@@ -173,10 +283,22 @@ PRODUCT_PACKAGES += \
         com.android.future.usb.accessory
 
 PRODUCT_PROPERTY_OVERRIDES += \
+	ro.feature.ztedrm.support=1 \
         ril.subscription.types=NV \
         persist.sys.usb.menu=enable \
         persist.sys.usb.config=mtp \
-        ro.config.sec_storage=1
+        ro.config.sec_storage=1 \
+	drm.service.enabled=true \
+	ro.config.multimode_cdma=true \
+	persist.radio.apm_sim_not_pwdn=1 \
+	ro.vendor.extension_library=/system/lib/libqc-opt.so \
+	persist.sys.ztelog.enable=0 \
+	ro.telephony.default_network=4 \
+	persist.radio.add_power_save=1 \
+	ro.com.google.clientidbase.ms=android-metropcs-us \
+	ro.com.google.clientidbase.yt=android-zte \
+	ro.com.google.clientidbase.am=android-zte \
+	ro.com.google.clientidbase.gmm=android-zte
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_elden

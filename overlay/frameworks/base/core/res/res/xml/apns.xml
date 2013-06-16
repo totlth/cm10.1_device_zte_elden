@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<apns count="3">
+  <apn name="INTERNET" numeric="311660" mcc="311" mnc="660" apn="internet.metropcs" user="" server="" password="" proxy="" port="" mmsproxy="" mmsport="" mmsprotocol="null" mmsc="" type="default,supl" />
+  <apn name="MMS" numeric="311660" mcc="311" mnc="660" apn="internet.metropcs" user="" server="" password="" proxy="metropcs.net" port="3128" mmsproxy="metropcs.net" mmsport="3128" mmsprotocol="null" mmsc="http://mms.metropcs.net:3128/mmsc" type="mms" />
+  <apn name="IMSIODT" numeric="311660" mcc="311" mnc="660" apn="imsiodt.metropcs" user="" server="" password="" proxy="" port="" mmsproxy="" mmsport="" mmsprotocol="null" mmsc="" type="ims" />
+</apns>
