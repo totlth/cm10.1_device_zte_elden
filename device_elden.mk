@@ -1,5 +1,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
+$(call inherit-product, build/target/product/full_base_telephony.mk)
+
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
@@ -11,8 +13,6 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-
-$(call inherit-product, build/target/product/full_base_telephony.mk)
 
 $(call inherit-product-if-exists, vendor/zte/elden/elden-vendor.mk)
 
@@ -26,20 +26,20 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
+$(call inherit-product, $(LOCAL_PATH)/prebuilts/lib/modules/modules.mk)
+
 ## Ramdisk
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/ramdisk/init.2ndstg.rc:root/init.2ndstg.rc \
-        $(LOCAL_PATH)/ramdisk/init.elden.rc:root/init.elden.rc \
+        $(LOCAL_PATH)/ramdisk/init:root/init \
+        $(LOCAL_PATH)/ramdisk/init.rc:root/init.rc \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \
         $(LOCAL_PATH)/ramdisk/init.qcom.sh:root/init.qcom.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc \
         $(LOCAL_PATH)/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
-        $(LOCAL_PATH)/ramdisk/init.target.rc:root/init.target.rc \
         $(LOCAL_PATH)/ramdisk/ueventd.rc:root/ueventd.qcom.rc \
         $(LOCAL_PATH)/ramdisk/logo.bmp:root/logo.bmp \
-        $(LOCAL_PATH)/ramdisk/sbin/ueventd:root/sbin/ueventd \
         $(LOCAL_PATH)/ramdisk/sbin/usbconfig:root/sbin/usbconfig
 
 #LLVM for RenderScript
@@ -64,10 +64,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
 	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 
-# APN
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/prebuilts/etc/apns-conf.xml:system/etc/apns-conf.xml	
-
 # Audio
 PRODUCT_PACKAGES += \
 	alsa.msm8960 \
@@ -79,10 +75,14 @@ PRODUCT_PACKAGES += \
         libaudioutils
 
 PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/prebuilts/lib/libsrsprocessing.so:obj/lib/libsrsprocessing.so
+
+PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/prebuilts/lib/libacdbloader.so:system/lib/libacdbloader.so \
 	$(LOCAL_PATH)/prebuilts/lib/libalsautils.so:system/lib/libalsautils.so \
 	$(LOCAL_PATH)/prebuilts/lib/libaudcal.so:system/lib/libaudcal.so \
-	$(LOCAL_PATH)/prebuilts/lib/libaudioalsa.so:system/lib/libaudioalsa.so
+	$(LOCAL_PATH)/prebuilts/lib/libaudioalsa.so:system/lib/libaudioalsa.so \
+	$(LOCAL_PATH)/prebuilts/lib/libsrsprocessing.so:system/lib/libsrsprocessing.so
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
@@ -109,9 +109,13 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+	Camera \
 	camera.msm8960 \
 	libcameraservice \
 	libcamera_client
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/prebuilts/lib/liboemcamera.so:obj/lib/liboemcamera.so
 
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/bin/mm-qcamera-daemon:system/bin/mm-qcamera-daemon \
@@ -132,7 +136,6 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/lib/egl/egl.cfg:system/lib/egl/egl.cfg \
         $(LOCAL_PATH)/prebuilts/lib/egl/eglsubAndroid.so:system/lib/egl/eglsubAndroid.so \
         $(LOCAL_PATH)/prebuilts/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
-        $(LOCAL_PATH)/prebuilts/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so.so \
         $(LOCAL_PATH)/prebuilts/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
         $(LOCAL_PATH)/prebuilts/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
         $(LOCAL_PATH)/prebuilts/lib/egl/libGLESv2S3D_adreno200.so:system/lib/egl/libGLESv2S3D_adreno200.so \
@@ -143,20 +146,24 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/lib/libOpenCL.so:system/lib/libOpenCL.so \
         $(LOCAL_PATH)/prebuilts/lib/libOpenVG.so:system/lib/libOpenVG.so \
         $(LOCAL_PATH)/prebuilts/lib/libsc-a2xx.so:system/lib/libsc-a2xx.so \
-        $(LOCAL_PATH)/prebuilts/lib/libsc-a3xx.so:system/lib/libsc-a3xx.so \
+        $(LOCAL_PATH)/prebuilts/lib/libsc-a3xx.so:system/lib/libsc-a3xx.so
 
 PRODUCT_PACKAGES += \
         copybit.msm8960 \
+        gralloc.default \
         gralloc.msm8960 \
         hwcomposer.msm8960 \
         libc2dcolorconvert \
         libgenlock \
+        libhwcexternal \
+        libhwcservice \
         libmemalloc \
-        liboverlay
+        liboverlay \
+        libqdutils \
+	libtilerenderer
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/prebuilts/lib/libI420colorconvert.so:system/lib/libI420colorconvert.so \
-	$(LOCAL_PATH)/prebuilts/lib/libtilerenderer.so:system/lib/libtilerenderer.so
+	$(LOCAL_PATH)/prebuilts/lib/libI420colorconvert.so:system/lib/libI420colorconvert.so
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -177,8 +184,8 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/lib/libloc_ext.so:system/lib/libloc_ext.so
 
 # HDMI
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/prebuilts/bin/hdmid:system/bin/hdmid
+PRODUCT_PACKAGES += \
+	hdmid
 
 # Keyboard/Touchscreen
 PRODUCT_COPY_FILES += \
@@ -191,7 +198,8 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/usr/keylayout/msm8960-snd-card_Button_Jack.kl:system/usr/keylayout/msm8960-snd-card_Button_Jack.kl \
         $(LOCAL_PATH)/prebuilts/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
         $(LOCAL_PATH)/prebuilts/usr/keylayout/syna-touchscreen.kl:system/usr/keylayout/syna-touchscreen.kl \
-	$(LOCAL_PATH)/prebuilts/usr/idc/Fts-touchscreen.idc:system/usr/idc/Fts-touchscreen.idc
+	$(LOCAL_PATH)/prebuilts/usr/idc/Fts-touchscreen.idc:system/usr/idc/Fts-touchscreen.idc \
+	$(LOCAL_PATH)/prebuilts/usr/idc/syna-touchscreen.idc:system/usr/idc/syna-touchscreen.idc
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -199,6 +207,7 @@ PRODUCT_PACKAGES += \
 
 # Media/OMX
 PRODUCT_PACKAGES += \
+	libdashplayer \
         libdivxdrmdecrypt \
         libmm-omxcore \
 	libOmxAacEnc \
@@ -216,7 +225,8 @@ PRODUCT_PACKAGES += \
         mm-vdec-omx-test \
         mm-venc-omx-test720p \
         mm-video-driver-test \
-        mm-video-encdrv-test
+        mm-video-encdrv-test \
+	qcmediaplayer
 
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/etc/media_codecs.xml:system/etc/media_codecs.xml \
@@ -228,13 +238,16 @@ PRODUCT_PACKAGES += \
 	applypatch_static \
 	badblocks \
 	check_prereq \
+	librs_jni \
 	libwebcore \
-	libxml2
+	libxml2 \
+	Torch
 
 # nfc
 PRODUCT_PACKAGES += \
+	com.android.nfc_extras \
 	libnfc \
-        com.android.nfc_extras
+	libnfc_ndef
 
 # Power
 
@@ -253,52 +266,48 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/lib/libQWiFiSoftApCfg.so:system/lib/libQWiFiSoftApCfg.so
 
 # Sensors
+PRODUCT_PACKAGES += \
+	libsensorservice
+
 PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/lib/libsensor1.so:system/lib/libsensor1.so \
         $(LOCAL_PATH)/prebuilts/lib/hw/sensors.goldfish.so:system/lib/hw/sensors.goldfish.so \
         $(LOCAL_PATH)/prebuilts/lib/hw/sensors.msm8960.so:system/lib/hw/sensors.msm8960.so
 
-# Wifi
+# Thermald
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/prebuilts/bin/hostapd:system/bin/hostapd \
-        $(LOCAL_PATH)/prebuilts/bin/hostapd_cli:system/bin/hostapd_cli \
+	$(LOCAL_PATH)/prebuilts/etc/thermald.conf:system/etc/thermald.conf
+
+# Vold
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/prebuilts/etc/vold.fstab:system/etc/vold.fstab
+
+# Wifi
+PRODUCT_PACKAGES += \
+	hostapd \
+	hostapd_cli \
+	libwpa_client \
+	wpa_cli \
+	wpa_supplicant
+
+PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/bin/wiperiface_v02:system/bin/wiperiface_v02 \
-        $(LOCAL_PATH)/prebuilts/bin/wpa_cli:system/bin/wpa_cli \
-        $(LOCAL_PATH)/prebuilts/bin/wpa_supplicant:system/bin/wpa_supplicant \
-        $(LOCAL_PATH)/prebuilts/etc/init.wlanprop.sh:system/etc/init.wlanprop.sh \
         $(LOCAL_PATH)/prebuilts/etc/wiperconfig.xml:system/etc/wiperconfig.xml \
         $(LOCAL_PATH)/prebuilts/etc/firmware/wlan/prima/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
         $(LOCAL_PATH)/prebuilts/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
         $(LOCAL_PATH)/prebuilts/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
         $(LOCAL_PATH)/prebuilts/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
         $(LOCAL_PATH)/prebuilts/etc/wifi/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
-        $(LOCAL_PATH)/prebuilts/lib/libwiperjni_v02.so:system/lib/libwiperjni_v02.so \
-        $(LOCAL_PATH)/prebuilts/lib/libwpa_client.so:system/lib/libwpa_client.so
-
-## Wifi kernel module (this does not get built with kernel source)
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/prebuilts/lib/modules/prima/prima_wlan.ko:system/lib/modules/prima/prima_wlan.ko
+        $(LOCAL_PATH)/prebuilts/lib/libwiperjni_v02.so:system/lib/libwiperjni_v02.so
 
 # USB
 PRODUCT_PACKAGES += \
         com.android.future.usb.accessory
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.feature.ztedrm.support=1 \
-        ril.subscription.types=NV \
-        persist.sys.usb.menu=enable \
-        persist.sys.usb.config=mtp \
-        ro.config.sec_storage=1 \
-	drm.service.enabled=true \
-	ro.config.multimode_cdma=true \
-	persist.radio.apm_sim_not_pwdn=1 \
-	ro.vendor.extension_library=/system/lib/libqc-opt.so \
-	persist.sys.ztelog.enable=0 \
-	ro.telephony.default_network=4 \
-	persist.radio.add_power_save=1 \
-	ro.com.google.clientidbase.ms=android-metropcs-us \
-	ro.com.google.clientidbase.yt=android-zte \
-	ro.com.google.clientidbase.am=android-zte \
-	ro.com.google.clientidbase.gmm=android-zte
+	dalvik.vm.execution-mode=int:jit \
+	dalvik.vm.dexopt-flags=m=y \
+        dalvik.vm.dexopt-data-only=1
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_elden

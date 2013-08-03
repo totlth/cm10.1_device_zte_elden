@@ -14,14 +14,20 @@ persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
+ro.cdma.subscribe_on_ruim_ready=true
+gsm.defaultpdpcontext.active=true
+telephony.lteOnCdmaDevice=1
+ro.telephony.ril_class=QualcommSharedRIL
+ro.telephony.ril.v3=subscriptionFromSource,skipCdmaSubcription,icccardstatus,qcomuiccstack
 DEVICE_PROVISIONED=1
 debug.sf.hw=1
 debug.egl.hw=1
-debug.composition.type=c2d
+debug.composition.type=dyn
 debug.overlayui.enable=1
 ro.sf.lcd_density=240
 dalvik.vm.heapsize=36m
 dev.pm.dyn_samplingrate=1
+
 
 #
 # system props for the cne module
@@ -55,6 +61,9 @@ media.stagefright.enable-scan=true
 # system props for the data modules
 #
 ro.use_data_netmgrd=true
+ro.data.large_tcp_window_size=true
+mobiledata.interfaces=wlan0,rmnet0
+persist.data.ds_fmc_app.mode=1
 
 #system props for time-services
 persist.timed.enable=true
@@ -69,11 +78,6 @@ persist.audio.handset.mic=analog
 #
 # 131072 is decimal for 0x20000 to report version 2
 ro.opengles.version=131072
-
-#
-# system prop for Bluetooth Dialup Networking
-#
-ro.qualcomm.bluetooth.dun=false
 
 #
 # system prop for Bluetooth SAP Profile
@@ -107,3 +111,17 @@ power.webview.DM=false
 
 # Not play shutter sound in silent mode
 ro.camera.sound.forced=0
+
+#
+persist.sys.usb.menu=enable
+ro.config.sec_storage=1
+persist.radio.reset_on_switch=0
+persist.radio.apm_sim_not_pwdn=1
+ro.com.google.clientidbase.ms=android-metropcs-us
+ro.vendor.extension_library=/system/lib/libqc-opt.so
+
+ro.com.google.clientidbase.yt=android-zte
+ro.com.google.clientidbase.am=android-zte
+ro.com.google.clientidbase.gmm=android-zte
+ro.telephony.default_network=4
+persist.radio.add_power_save=1

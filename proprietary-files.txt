@@ -9,7 +9,6 @@ bin/bridgemgrd
 
 bin/ccid_daemon
 bin/checkdata
-bin/cmp
 bin/cnd
 bin/curl
 
@@ -20,8 +19,6 @@ bin/drmdiagapp
 bin/ds_fmc_appd
 bin/dspcrashd
 bin/dun-server
-
-bin/ext4check.sh
 
 bin/fixebr
 bin/fixebr.sh
@@ -69,6 +66,7 @@ bin/nl_listener
 bin/omx_tests
 
 bin/ping6
+bin/pppd
 bin/port-bridge
 bin/powertop
 bin/profiler_daemon
@@ -111,6 +109,7 @@ bin/usbmanutag
 bin/vfat_valid
 bin/vfat_valid.sh
 
+bin/wifi_ftmd
 bin/wmdsi
 
 bin/zte_charger
@@ -118,14 +117,10 @@ bin/zte_charger
 etc/OperatorPolicy.xml
 etc/UserPolicy.xml
 
-etc/init.goldfish.sh
 etc/init.sysctl.sh
 etc/nv-conf.xml
 
-etc/thermald.conf
-
 etc/voicemail-conf.xml
-etc/vold.fstab
 
 etc/firmware/Ver11_20120409_N880E_ID0x55_app.bin
 etc/firmware/cyttsp_8960_cdp.hex
@@ -137,6 +132,9 @@ etc/firmware/vidc.b03
 etc/firmware/vidc.mdt
 etc/firmware/vidc_1080p.fw
 etc/firmware/vidcfw.elf
+
+etc/permissions/qcnvitems.xml
+etc/permissions/qcrilhook.xml
 
 etc/res/images/charger/battery_1.png
 etc/res/images/charger/battery_2.png
@@ -173,9 +171,9 @@ etc/srs/srsmodels.lic
 etc/srs/srs_processing.cfg
 etc/system_fonts.xml
 
-lib/drmclientlib.so
-
-lib/invoke_mock_media_player.so
+framework/modemwarmup.jar
+framework/qcnvitems.jar
+framework/qcrilhook.jar
 
 lib/libakmd.so
 lib/libalarmservice_jni.so
@@ -208,6 +206,7 @@ lib/libchromeview.so
 lib/libcneapiclient.so
 lib/libcneqmiutils.so
 lib/libcneutils.so
+lib/libCommandSvc.so
 lib/libconfigdb.so
 lib/libcurl.so
 
@@ -241,6 +240,8 @@ lib/libimage-jpeg-dec-omx-comp.so
 lib/libimage-jpeg-enc-omx-comp.so
 lib/libimage-omx-common.so
 
+lib/libminui_ftm.so
+lib/libminzip_ftm.so
 lib/libmm-abl-oem.so
 lib/libmm-abl.so
 lib/libmm-audio-resampler.so
@@ -309,10 +310,8 @@ lib/libril.so
 lib/librpc.so
 
 lib/libsapi_v4.so
-lib/libsensor1.so
 lib/libSHIMDivxDrm.so
 lib/libspeexwrapper.so
-lib/libsrsprocessing.so
 lib/libsurfaceflinger_client.so
 
 lib/libtcpfinaggr.so
@@ -357,6 +356,11 @@ lib/libztedrmjni.so
 lib/pp_proc_plugin.so
 lib/qnet-plugin.so
 lib/tcp-connections.so
+
+lib/bluez-plugin/audio.so
+lib/bluez-plugin/bluetooth-health.so
+lib/bluez-plugin/input.so
+lib/bluez-plugin/network.so
 
 vendor/firmware/libpn544_fw.so
 vendor/lib/drm/libdrmwvmplugin.so

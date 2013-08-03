@@ -1,0 +1,2 @@
+add_lunch_combo cm_elden-userdebug
+add_lunch_combo cm_elden-eng

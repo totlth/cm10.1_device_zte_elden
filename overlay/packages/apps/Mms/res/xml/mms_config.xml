@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mms_config version="4">
+    <bool name="enabledMMS">true</bool>
+    <int name="maxMessageSize">512000</int>
+    <int name="maxImageHeight">480</int>
+    <int name="maxImageWidth">640</int>
+    <int name="defaultSMSMessagesPerThread">500</int>
+    <int name="defaultMMSMessagesPerThread">50</int>
+    <int name="minMessageCountPerThread">10</int>
+    <int name="maxMessageCountPerThread">5000</int>
+    <string name="uaProfUrl">http://www.google.com/oha/rdf/ua-profile-kila.xml</string>
+    <int name="recipientLimit">10</int>
+    <int name="mmsRecipientLimit">10</int>
+    <int name="smsRecipientLimit">10</int>
+    <int name="smsToMmsTextThreshold">2</int>
+    <int name="maxSubjectLength">100</int>
+    <bool name="enableMultipartSMS">true</bool>
+    <bool name="enableSlideDuration">true</bool>
+    <int name="maxMessageTextSize">1000</int>
+    <string name="emailGatewayNumber">6245</string>
+    <string name="OPERATOR">METROPCS</string>
+    <string name="mmsMMSC">http://mms.metropcs.net:3128/mmsc</string>
+    <bool name="MetroPCS_enableCharacterCounter">true</bool>
+    <bool name="enableCmasInSms">true</bool>
+    <bool name="enableInsertContactMenu">true</bool>
+    <bool name="enableContactButton">true</bool>
+    <bool name="enableUnreadIndicator">true</bool>
+    <bool name="enableSelectItems">true</bool>
+    <bool name="enableShowSendPicture">true</bool>
+    <bool name="enableMifavorComposeMessageUi">true</bool>
+    <bool name="enableShowMmsEditSize">true</bool>
+    <bool name="enableShareVcardViaMms">true</bool>
+    <bool name="enableMMSAudioSelectFromSDCard">true</bool>
+    <bool name="enableShareVcalendarViaMms">true</bool>
+    <bool name="enableJoyn">true</bool>
+    <bool name="enableMMSReadReports">false</bool>
+</mms_config>
