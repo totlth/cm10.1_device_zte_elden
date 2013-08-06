@@ -39,7 +39,7 @@ case "$target" in
     msm8960*)
         # The property below is used in Qcom SDK for softap to determine
         # the wifi driver config file
-        setprop wlan.driver.config /data/misc/wifi/WCNSS_qcom_cfg.ini
+        setprop wlan.driver.config /etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
         # We need to make sure the WCNSS platform driver is running.
         # The WCNSS platform driver can either be built as a loadable
         # module or it can be built-in to the kernel.  If it is built
@@ -66,6 +66,7 @@ case "$target" in
                         # so that the driver knows userspace is
                         # available for firmware download requests
                         echo 1 > $wcnssnode
+                        echo 1 > /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr
                         ;;
                     *)
                         # There is not a kernel module present and
