@@ -244,9 +244,6 @@ on post-fs-data
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
     symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
-    symlink /system/lib/modules/prima/prima_wlan.ko /system/lib/modules/wlan.ko
-    symlink libwiperjni_v02.so /system/lib/libwiperjni.so
-    symlink wiperiface_v02 /system/bin/wiperiface
 
     #Create directories for wiper services
     mkdir /data/wpstiles/ 0755 shell
