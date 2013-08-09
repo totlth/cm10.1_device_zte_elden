@@ -224,14 +224,10 @@ lib/libdss.so
 lib/libdsucsd.so
 lib/libdsutils.so
 
-lib/libfacelock_jni.so
 lib/libfastcvopt.so
 lib/libFileMux.so
-lib/libfilterpack_facedetect.so
 lib/libflint_engine_jni_api.so
-lib/libfrsdk.so
 
-lib/libgcomm_jni.so
 lib/libgemini.so
 lib/libgeofence.so
 
@@ -282,7 +278,6 @@ lib/libOmxMux.so
 lib/libOmxQcelp13Dec.so
 lib/libOmxWmaDec.so
 
-lib/libpatts_engine_jni_api.so
 lib/libpicowrapper.so
 lib/libpng.so
 lib/libprofiler_msmadc.so
@@ -311,7 +306,6 @@ lib/librpc.so
 
 lib/libsapi_v4.so
 lib/libSHIMDivxDrm.so
-lib/libspeexwrapper.so
 lib/libsurfaceflinger_client.so
 
 lib/libtcpfinaggr.so
@@ -328,7 +322,6 @@ lib/libvdmfumo.so
 lib/libvideochat_jni.so
 lib/libvideochat_stabilize.so
 lib/libvoicesearch.so
-lib/libvorbisencoder.so
 
 lib/libwebkitaccel.so
 lib/libwebrtc_audio_preprocessing.so
