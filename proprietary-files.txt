@@ -120,8 +120,6 @@ etc/UserPolicy.xml
 etc/init.sysctl.sh
 etc/nv-conf.xml
 
-etc/voicemail-conf.xml
-
 etc/firmware/Ver11_20120409_N880E_ID0x55_app.bin
 etc/firmware/cyttsp_8960_cdp.hex
 
@@ -133,6 +131,9 @@ etc/firmware/vidc.mdt
 etc/firmware/vidc_1080p.fw
 etc/firmware/vidcfw.elf
 
+etc/permissions/cneapiclient.xml
+etc/permissions/com.qualcomm.location.quipslib.xml
+etc/permissions/com.qualcomm.location.vzw_library.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 
@@ -171,6 +172,9 @@ etc/srs/srsmodels.lic
 etc/srs/srs_processing.cfg
 etc/system_fonts.xml
 
+framework/cneapiclient.jar
+framework/com.qualcomm.location.vzw_library.jar
+framework/com.quicinc.cne.jar
 framework/modemwarmup.jar
 framework/qcnvitems.jar
 framework/qcrilhook.jar
@@ -226,7 +230,6 @@ lib/libdsutils.so
 
 lib/libfastcvopt.so
 lib/libFileMux.so
-lib/libflint_engine_jni_api.so
 
 lib/libgemini.so
 lib/libgeofence.so
@@ -278,7 +281,6 @@ lib/libOmxMux.so
 lib/libOmxQcelp13Dec.so
 lib/libOmxWmaDec.so
 
-lib/libpicowrapper.so
 lib/libpng.so
 lib/libprofiler_msmadc.so
 
@@ -319,9 +321,6 @@ lib/libulp2.so
 lib/libv8.so
 lib/libvdmengine.so
 lib/libvdmfumo.so
-lib/libvideochat_jni.so
-lib/libvideochat_stabilize.so
-lib/libvoicesearch.so
 
 lib/libwebkitaccel.so
 lib/libwebrtc_audio_preprocessing.so
