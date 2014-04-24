@@ -13,7 +13,6 @@ bin/cnd
 bin/curl
 
 bin/diag_klog
-bin/diag_mdlog
 bin/diag_uart_log
 bin/drmdiagapp
 bin/ds_fmc_appd
@@ -110,7 +109,6 @@ bin/vfat_valid
 bin/vfat_valid.sh
 
 bin/wifi_ftmd
-bin/wmdsi
 
 bin/zte_charger
 
@@ -206,7 +204,6 @@ lib/libchromatix_s5k3l1yx_hfr_90fps.so
 lib/libchromatix_s5k3l1yx_preview.so
 lib/libchromatix_s5k3l1yx_video_hd.so
 lib/libchromatix_s5k3l1yx_zsl.so
-lib/libchromeview.so
 lib/libcneapiclient.so
 lib/libcneqmiutils.so
 lib/libcneutils.so
@@ -268,7 +265,6 @@ lib/libmmstillomx.so
 lib/libmmwfdinterface.so
 lib/libmmwfdsinkinterface.so
 lib/libmmwfdsrcinterface.so
-lib/libmyaes.so
 
 lib/libnetmgr.so
 lib/libnetmonitor.so
@@ -306,7 +302,6 @@ lib/libril-qcril-hook-oem.so
 lib/libril.so
 lib/librpc.so
 
-lib/libsapi_v4.so
 lib/libSHIMDivxDrm.so
 lib/libsurfaceflinger_client.so
 

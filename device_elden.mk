@@ -16,6 +16,8 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, vendor/zte/elden/elden-vendor.mk)
 
+#$(call inherit-product, hardware/qcom/msm8960/msm8960.mk)
+
 LOCAL_PATH := device/zte/elden
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := $(LOCAL_PATH)/kernel
@@ -30,8 +32,7 @@ $(call inherit-product, $(LOCAL_PATH)/prebuilts/lib/modules/modules.mk)
 
 ## Ramdisk
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/ramdisk/init:root/init \
-        $(LOCAL_PATH)/ramdisk/init.rc:root/init.rc \
+        $(LOCAL_PATH)/ramdisk/fstab.qcom:root/fstab.qcom \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \
