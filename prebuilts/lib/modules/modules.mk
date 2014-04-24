@@ -18,4 +18,4 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
 	$(LOCAL_PATH)/spidev.ko:system/lib/modules/spidev.ko \
 	$(LOCAL_PATH)/zte_krait_oc.ko:system/lib/modules/zte_krait_oc.ko \
-        $(LOCAL_PATH)/prima/prima_wlan.ko:system/lib/modules/prima/prima_wlan.ko
+        $(LOCAL_PATH)/prima/prima_wlan.ko:system/lib/modules/wlan.ko
