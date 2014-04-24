@@ -33,6 +33,7 @@ $(call inherit-product, $(LOCAL_PATH)/prebuilts/lib/modules/modules.mk)
 ## Ramdisk
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/ramdisk/fstab.qcom:root/fstab.qcom \
+        $(LOCAL_PATH)/ramdisk/init.rc:root/init.rc \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \

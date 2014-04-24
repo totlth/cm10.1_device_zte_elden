@@ -4,6 +4,8 @@
 
 TARGET_SPECIFIC_HEADER_PATH += device/zte/elden/include
 
+TARGET_PROVIDES_INIT_RC := true
+
 # General
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := elden
