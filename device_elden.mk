@@ -293,14 +293,14 @@ PRODUCT_PACKAGES += \
 	wpa_supplicant
 
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/prebuilts/bin/wiperiface_v02:system/bin/wiperiface_v02 \
+        $(LOCAL_PATH)/prebuilts/bin/wiperiface_v02:system/bin/wiperiface \
         $(LOCAL_PATH)/prebuilts/etc/wiperconfig.xml:system/etc/wiperconfig.xml \
         $(LOCAL_PATH)/prebuilts/etc/firmware/wlan/prima/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
         $(LOCAL_PATH)/prebuilts/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
         $(LOCAL_PATH)/prebuilts/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
         $(LOCAL_PATH)/prebuilts/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
         $(LOCAL_PATH)/prebuilts/etc/wifi/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
-        $(LOCAL_PATH)/prebuilts/lib/libwiperjni_v02.so:system/lib/libwiperjni_v02.so
+        $(LOCAL_PATH)/prebuilts/lib/libwiperjni_v02.so:system/lib/libwiperjni.so
 
 # USB
 PRODUCT_PACKAGES += \
