@@ -2,7 +2,7 @@
 # inherit from the proprietary version
 -include vendor/zte/elden/BoardConfigVendor.mk
 
-TARGET_SPECIFIC_HEADER_PATH += device/zte/elden/include
+#TARGET_SPECIFIC_HEADER_PATH += device/zte/elden/include
 
 TARGET_PROVIDES_INIT_RC := true
 
@@ -54,7 +54,7 @@ BOARD_USES_FLUENCE_INCALL := true
 BOARD_USES_SEPERATED_AUDIO_INPUT := true
 
 # Camera
-#V4L2_BASED_LIBCAM :=true
+TARGET_PROVIDES_LIBCAMERA := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -159,7 +159,6 @@ TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/elden/recovery/kernel
 BOARD_CUSTOM_GRAPHICS := ../../../device/zte/elden/recovery/graphics.c
 
 # USB
-#BOARD_CUSTOM_USB_CONTROLLER := ../../device/zte/elden/UsbController.cpp
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"

@@ -16,8 +16,6 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, vendor/zte/elden/elden-vendor.mk)
 
-#$(call inherit-product, hardware/qcom/msm8960/msm8960.mk)
-
 LOCAL_PATH := device/zte/elden
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := $(LOCAL_PATH)/kernel
@@ -111,8 +109,6 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-	Camera \
-	camera.msm8960 \
 	libcameraservice \
 	libcamera_client
 
@@ -124,6 +120,8 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/bin/mm-qcamera-test:system/bin/mm-qcamera-test \
         $(LOCAL_PATH)/prebuilts//bin/mm-qcamera-testsuite-client:system/bin/mm-qcamera-testsuite-client \
         $(LOCAL_PATH)/prebuilts/bin/v4l2-qcamera-app:system/bin/v4l2-qcamera-app \
+    $(LOCAL_PATH)/prebuilts/lib/hw/camera.goldfish.so:system/lib/hw/camera.goldfish.so \
+    $(LOCAL_PATH)/prebuilts/lib/hw/camera.msm8960.so:system/lib/hw/camera.msm8960.so \
         $(LOCAL_PATH)/prebuilts/lib/liboemcamera.so:system/lib/liboemcamera.so
 
 # Display Firmware
@@ -142,6 +140,8 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
         $(LOCAL_PATH)/prebuilts/lib/egl/libGLESv2S3D_adreno200.so:system/lib/egl/libGLESv2S3D_adreno200.so \
         $(LOCAL_PATH)/prebuilts/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \
+        $(LOCAL_PATH)/prebuilts/lib/libc2d2_a3xx.so:system/lib/libc2d2_a3xx.so \
+        $(LOCAL_PATH)/prebuilts/lib/libc2d2_z180.so:system/lib/libc2d2_z180.so \
         $(LOCAL_PATH)/prebuilts/lib/libC2D2.so:system/lib/libC2D2.so \
         $(LOCAL_PATH)/prebuilts/lib/libgsl.so:system/lib/libgsl.so \
         $(LOCAL_PATH)/prebuilts/lib/libllvm-a3xx.so:system/lib/libllvm-a3xx.so \
@@ -162,6 +162,7 @@ PRODUCT_PACKAGES += \
         libmemalloc \
         liboverlay \
         libqdutils \
+        libQcomUI \
 	libtilerenderer
 
 PRODUCT_COPY_FILES += \
@@ -180,7 +181,6 @@ PRODUCT_PACKAGES += \
         libloc_eng
 
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/prebuilts/etc/gps.conf:system/etc/gps.conf \
         $(LOCAL_PATH)/prebuilts/lib/libgps.so:system/lib/libgps.so \
         $(LOCAL_PATH)/prebuilts/lib/libloc_api_v02.so:system/lib/libloc_api_v02.so \
         $(LOCAL_PATH)/prebuilts/lib/libloc_ext.so:system/lib/libloc_ext.so
@@ -191,14 +191,10 @@ PRODUCT_PACKAGES += \
 
 # Keyboard/Touchscreen
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/prebuilts/usr/keychars/qwerty.kcm:system/usr/keychars/qwerty.kcm \
-        $(LOCAL_PATH)/prebuilts/usr/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm \
         $(LOCAL_PATH)/prebuilts/usr/keylayout/atmel-touchscreen.kl:system/usr/keylayout/atmel-touchscreen.kl \
-        $(LOCAL_PATH)/prebuilts/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
         $(LOCAL_PATH)/prebuilts/usr/keylayout/Fts-touchscreen.kl:system/usr/keylayout/Fts-touchscreen.kl \
         $(LOCAL_PATH)/prebuilts/usr/keylayout/keypad_8960.kl:system/usr/keylayout/keypad_8960.kl \
         $(LOCAL_PATH)/prebuilts/usr/keylayout/msm8960-snd-card_Button_Jack.kl:system/usr/keylayout/msm8960-snd-card_Button_Jack.kl \
-        $(LOCAL_PATH)/prebuilts/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
         $(LOCAL_PATH)/prebuilts/usr/keylayout/syna-touchscreen.kl:system/usr/keylayout/syna-touchscreen.kl \
 	$(LOCAL_PATH)/prebuilts/usr/idc/Fts-touchscreen.idc:system/usr/idc/Fts-touchscreen.idc \
 	$(LOCAL_PATH)/prebuilts/usr/idc/syna-touchscreen.idc:system/usr/idc/syna-touchscreen.idc
