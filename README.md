@@ -2,7 +2,8 @@ WIP - CM 10.1 Device Tree
 
 Main bugs:<br>
 audio/phone - audio doesn't work on phone & using phone breaks audio<br>
-camera
+camera<br>
+video
 
 There may be more. I haven't tested everything.
 

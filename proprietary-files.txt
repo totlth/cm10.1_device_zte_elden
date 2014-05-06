@@ -119,6 +119,7 @@ etc/nv-conf.xml
 
 etc/firmware/Ver11_20120409_N880E_ID0x55_app.bin
 etc/firmware/cyttsp_8960_cdp.hex
+etc/firmware/ZTE_U880F_SUCCESS_PR1183396-s2202_32333042.img
 
 etc/firmware/vidc.b00
 etc/firmware/vidc.b01
@@ -281,7 +282,6 @@ lib/libprofiler_msmadc.so
 
 lib/libqc-opt.so
 lib/libqcci_adc.so
-lib/libQcomUI.so
 lib/libqdi.so
 lib/libqdp.so
 lib/libqmi.so

@@ -30,8 +30,8 @@ $(call inherit-product, $(LOCAL_PATH)/prebuilts/lib/modules/modules.mk)
 
 ## Ramdisk
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/ramdisk/fstab.qcom:root/fstab.qcom \
         $(LOCAL_PATH)/ramdisk/init.rc:root/init.rc \
+        $(LOCAL_PATH)/ramdisk/fstab.qcom:root/fstab.qcom \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
         $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \
@@ -42,36 +42,13 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/ramdisk/logo.bmp:root/logo.bmp \
         $(LOCAL_PATH)/ramdisk/sbin/usbconfig:root/sbin/usbconfig
 
-#LLVM for RenderScript
-LLVM_ROOT_PATH := external/llvm
-
-# Permissions
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
-	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-	frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
-	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-	frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-	frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
-	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-
 # Audio
 PRODUCT_PACKAGES += \
 	alsa.msm8960 \
         audio.a2dp.default \
-        audio.primary.msm8960 \
         audio_policy.msm8960 \
+        audio.primary.msm8960 \
         libalsa-intf \
-        libaudioparameter \
         libaudioutils
 
 PRODUCT_COPY_FILES += \
@@ -109,6 +86,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+        camera.msm8960 \
 	libcameraservice \
 	libcamera_client
 
@@ -120,8 +98,6 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/bin/mm-qcamera-test:system/bin/mm-qcamera-test \
         $(LOCAL_PATH)/prebuilts//bin/mm-qcamera-testsuite-client:system/bin/mm-qcamera-testsuite-client \
         $(LOCAL_PATH)/prebuilts/bin/v4l2-qcamera-app:system/bin/v4l2-qcamera-app \
-    $(LOCAL_PATH)/prebuilts/lib/hw/camera.goldfish.so:system/lib/hw/camera.goldfish.so \
-    $(LOCAL_PATH)/prebuilts/lib/hw/camera.msm8960.so:system/lib/hw/camera.msm8960.so \
         $(LOCAL_PATH)/prebuilts/lib/liboemcamera.so:system/lib/liboemcamera.so
 
 # Display Firmware
@@ -152,17 +128,15 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
         copybit.msm8960 \
-        gralloc.default \
         gralloc.msm8960 \
         hwcomposer.msm8960 \
-        libc2dcolorconvert \
         libgenlock \
         libhwcexternal \
         libhwcservice \
         libmemalloc \
         liboverlay \
-        libqdutils \
         libQcomUI \
+        libqdutils \
 	libtilerenderer
 
 PRODUCT_COPY_FILES += \
@@ -200,12 +174,15 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/prebuilts/usr/idc/syna-touchscreen.idc:system/usr/idc/syna-touchscreen.idc
 
 # Lights
-PRODUCT_PACKAGES += \
-        lights.msm8960
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/prebuilts/lib/hw/lights.msm8960.so:system/lib/hw/lights.msm8960.so
+
+#LLVM for RenderScript
+LLVM_ROOT_PATH := external/llvm
 
 # Media/OMX
 PRODUCT_PACKAGES += \
-	libdashplayer \
+        libc2dcolorconvert \
         libdivxdrmdecrypt \
         libmm-omxcore \
 	libOmxAacEnc \
@@ -223,8 +200,7 @@ PRODUCT_PACKAGES += \
         mm-vdec-omx-test \
         mm-venc-omx-test720p \
         mm-video-driver-test \
-        mm-video-encdrv-test \
-	qcmediaplayer
+        mm-video-encdrv-test
 
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/etc/media_codecs.xml:system/etc/media_codecs.xml \
@@ -238,14 +214,32 @@ PRODUCT_PACKAGES += \
 	check_prereq \
 	librs_jni \
 	libwebcore \
-	libxml2 \
-	Torch
+	libxml2
 
 # nfc
 PRODUCT_PACKAGES += \
 	com.android.nfc_extras \
 	libnfc \
 	libnfc_ndef
+
+# Permissions
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+	frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
+	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+	frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+	frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
+	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
 # Power
 
@@ -263,18 +257,29 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/etc/qcom/softap/hostapd_default.conf:system/etc/qcom/softap/hostapd_default.conf \
         $(LOCAL_PATH)/prebuilts/lib/libQWiFiSoftApCfg.so:system/lib/libQWiFiSoftApCfg.so
 
+# Sdcard
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/prebuilts/bin/sdcard:system/bin/sdcard
+
 # Sensors
 PRODUCT_PACKAGES += \
 	libsensorservice
 
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/lib/libsensor1.so:system/lib/libsensor1.so \
-        $(LOCAL_PATH)/prebuilts/lib/hw/sensors.goldfish.so:system/lib/hw/sensors.goldfish.so \
         $(LOCAL_PATH)/prebuilts/lib/hw/sensors.msm8960.so:system/lib/hw/sensors.msm8960.so
 
 # Thermald
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/prebuilts/etc/thermald.conf:system/etc/thermald.conf
+
+# Torch
+PRODUCT_PACKAGES += \
+	Torch
+
+# USB
+PRODUCT_PACKAGES += \
+        com.android.future.usb.accessory
 
 # Vold
 PRODUCT_COPY_FILES += \
@@ -297,10 +302,6 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/prebuilts/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
         $(LOCAL_PATH)/prebuilts/etc/wifi/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
         $(LOCAL_PATH)/prebuilts/lib/libwiperjni_v02.so:system/lib/libwiperjni.so
-
-# USB
-PRODUCT_PACKAGES += \
-        com.android.future.usb.accessory
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.execution-mode=int:jit \

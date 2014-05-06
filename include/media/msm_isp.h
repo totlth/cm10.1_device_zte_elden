@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, Code Aurora Forum. All rights reserved.
+/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -59,6 +59,15 @@
 #define MSG_ID_OUTPUT_PRIMARY           40
 #define MSG_ID_OUTPUT_SECONDARY         41
 #define MSG_ID_STATS_COMPOSITE          42
+#define MSG_ID_OUTPUT_TERTIARY1         43
+#define MSG_ID_STOP_LS_ACK              44
+#define MSG_ID_OUTPUT_TERTIARY2         45
+#define MSG_ID_STATS_BG                 46
+#define MSG_ID_STATS_BF                 47
+#define MSG_ID_STATS_BHIST              48
+#define MSG_ID_RDI0_UPDATE_ACK          49
+#define MSG_ID_RDI1_UPDATE_ACK          50
+#define MSG_ID_RDI2_UPDATE_ACK          51
 
 /* ISP command IDs */
 #define VFE_CMD_DUMMY_0                                 0
@@ -199,11 +208,36 @@
 #define VFE_CMD_SCALE_OUTPUT2_CONFIG                    135
 #define VFE_CMD_CAPTURE_RAW                             136
 #define VFE_CMD_STOP_LIVESHOT                           137
+#define VFE_CMD_RECONFIG_VFE                            138
+#define VFE_CMD_STATS_REQBUF                            139
+#define VFE_CMD_STATS_ENQUEUEBUF                        140
+#define VFE_CMD_STATS_FLUSH_BUFQ                        141
+#define VFE_CMD_STATS_UNREGBUF                          142
+#define VFE_CMD_STATS_BG_START                          143
+#define VFE_CMD_STATS_BG_STOP                           144
+#define VFE_CMD_STATS_BF_START                          145
+#define VFE_CMD_STATS_BF_STOP                           146
+#define VFE_CMD_STATS_BHIST_START                       147
+#define VFE_CMD_STATS_BHIST_STOP                        148
+#define VFE_CMD_RESET_2                                 149
+#define VFE_CMD_FOV_ENC_CFG                             150
+#define VFE_CMD_FOV_VIEW_CFG                            151
+#define VFE_CMD_FOV_ENC_UPDATE                          152
+#define VFE_CMD_FOV_VIEW_UPDATE                         153
+#define VFE_CMD_SCALER_ENC_CFG                          154
+#define VFE_CMD_SCALER_VIEW_CFG                         155
+#define VFE_CMD_SCALER_ENC_UPDATE                       156
+#define VFE_CMD_SCALER_VIEW_UPDATE                      157
+#define VFE_CMD_COLORXFORM_ENC_CFG                      158
+#define VFE_CMD_COLORXFORM_VIEW_CFG                     159
+#define VFE_CMD_COLORXFORM_ENC_UPDATE                   160
+#define VFE_CMD_COLORXFORM_VIEW_UPDATE                  161
+#define VFE_CMD_TEST_GEN_CFG                            162
 
 struct msm_isp_cmd {
-	int32_t  id;
+	int32_t id;
 	uint16_t length;
-	void     *value;
+	void *value;
 };
 
 #define VPE_CMD_DUMMY_0                                 0
@@ -221,14 +255,14 @@ struct msm_isp_cmd {
 #define VPE_CMD_ZOOM                                    13
 #define VPE_CMD_MAX                                     14
 
-#define MSM_PP_CMD_TYPE_NOT_USED        0  /* not used */
-#define MSM_PP_CMD_TYPE_VPE             1  /* VPE cmd */
-#define MSM_PP_CMD_TYPE_MCTL            2  /* MCTL cmd */
+#define MSM_PP_CMD_TYPE_NOT_USED        0	/* not used */
+#define MSM_PP_CMD_TYPE_VPE             1	/* VPE cmd */
+#define MSM_PP_CMD_TYPE_MCTL            2	/* MCTL cmd */
 
-#define MCTL_CMD_DUMMY_0                0  /* not used */
-#define MCTL_CMD_GET_FRAME_BUFFER       1  /* reserve a free frame buffer */
-#define MCTL_CMD_PUT_FRAME_BUFFER       2  /* return the free frame buffer */
-#define MCTL_CMD_DIVERT_FRAME_PP_PATH   3  /* divert frame for pp */
+#define MCTL_CMD_DUMMY_0                0	/* not used */
+#define MCTL_CMD_GET_FRAME_BUFFER       1	/* reserve a free frame buffer */
+#define MCTL_CMD_PUT_FRAME_BUFFER       2	/* return the free frame buffer */
+#define MCTL_CMD_DIVERT_FRAME_PP_PATH   3	/* divert frame for pp */
 
 /* event typese sending to MCTL PP module */
 #define MCTL_PP_EVENT_NOTUSED           0
@@ -241,7 +275,6 @@ struct msm_isp_cmd {
 #define VPE_SCALER_CONFIG_LEN           260
 #define VPE_DIS_OFFSET_CFG_LEN          12
 
-
 #define CAPTURE_WIDTH          1280
 #define IMEM_Y_SIZE            (CAPTURE_WIDTH*16)
 #define IMEM_CBCR_SIZE         (CAPTURE_WIDTH*8)
@@ -251,7 +284,6 @@ struct msm_isp_cmd {
 
 #define IMEM_Y_PONG_OFFSET     (IMEM_CBCR_PING_OFFSET + IMEM_CBCR_SIZE)
 #define IMEM_CBCR_PONG_OFFSET  (IMEM_Y_PONG_OFFSET + IMEM_Y_SIZE)
-
 
 struct msm_vpe_op_mode_cfg {
 	uint8_t op_mode_cfg[VPE_OPERATION_MODE_CFG_LEN];
@@ -291,14 +323,14 @@ struct msm_vpe_clock_rate {
 	uint32_t rate;
 };
 struct msm_pp_crop {
-	uint32_t  src_x;
-	uint32_t  src_y;
-	uint32_t  src_w;
-	uint32_t  src_h;
-	uint32_t  dst_x;
-	uint32_t  dst_y;
-	uint32_t  dst_w;
-	uint32_t  dst_h;
+	uint32_t src_x;
+	uint32_t src_y;
+	uint32_t src_w;
+	uint32_t src_h;
+	uint32_t dst_x;
+	uint32_t dst_y;
+	uint32_t dst_w;
+	uint32_t dst_h;
 	uint8_t update_flag;
 };
 #define MSM_MCTL_PP_VPE_FRAME_ACK    (1<<0)
@@ -306,7 +338,7 @@ struct msm_pp_crop {
 
 struct msm_mctl_pp_frame_cmd {
 	uint32_t cookie;
-	uint8_t  vpe_output_action;
+	uint8_t vpe_output_action;
 	uint32_t src_buf_handle;
 	uint32_t dest_buf_handle;
 	struct msm_pp_crop crop;
@@ -314,17 +346,23 @@ struct msm_mctl_pp_frame_cmd {
 	/* TBD: 3D related */
 };
 
-#define VFE_OUTPUTS_MAIN_AND_PREVIEW	BIT(0)
-#define VFE_OUTPUTS_MAIN_AND_VIDEO	BIT(1)
-#define VFE_OUTPUTS_MAIN_AND_THUMB	BIT(2)
-#define VFE_OUTPUTS_THUMB_AND_MAIN	BIT(3)
-#define VFE_OUTPUTS_PREVIEW_AND_VIDEO	BIT(4)
-#define VFE_OUTPUTS_VIDEO_AND_PREVIEW	BIT(5)
-#define VFE_OUTPUTS_PREVIEW		BIT(6)
-#define VFE_OUTPUTS_VIDEO		BIT(7)
-#define VFE_OUTPUTS_RAW			BIT(8)
-#define VFE_OUTPUTS_JPEG_AND_THUMB	BIT(9)
-#define VFE_OUTPUTS_THUMB_AND_JPEG	BIT(10)
+#define VFE_OUTPUTS_MAIN_AND_PREVIEW    BIT(0)
+#define VFE_OUTPUTS_MAIN_AND_VIDEO      BIT(1)
+#define VFE_OUTPUTS_MAIN_AND_THUMB      BIT(2)
+#define VFE_OUTPUTS_THUMB_AND_MAIN      BIT(3)
+#define VFE_OUTPUTS_PREVIEW_AND_VIDEO   BIT(4)
+#define VFE_OUTPUTS_VIDEO_AND_PREVIEW   BIT(5)
+#define VFE_OUTPUTS_PREVIEW             BIT(6)
+#define VFE_OUTPUTS_VIDEO               BIT(7)
+#define VFE_OUTPUTS_RAW                 BIT(8)
+#define VFE_OUTPUTS_JPEG_AND_THUMB      BIT(9)
+#define VFE_OUTPUTS_THUMB_AND_JPEG      BIT(10)
+#define VFE_OUTPUTS_RDI0                BIT(11)
+#define VFE_OUTPUTS_RDI1                BIT(12)
+
+struct msm_frame_info {
+	uint32_t inst_handle;
+	uint32_t path;
+};
 
 #endif /*__MSM_ISP_H__*/
-

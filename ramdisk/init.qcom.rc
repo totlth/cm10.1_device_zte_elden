@@ -4,16 +4,14 @@ import init.qcom.usb.rc
 on early-init
     # for backwards compatibility
     export EXTERNAL_STORAGE /storage/sdcard0
-    export EXTERNAL_ADD_STORAGE /storage/sdcard1
+    export SECONDARY_STORAGE /mnt/sdcard2
     mkdir /storage 0775 root system
     mkdir /storage/sdcard0 0000 system system
-    mkdir /storage/sdcard1 0000 system system
     mkdir /mnt 0775 root system
-    mkdir /mnt/sdcard 0000 system system
+    mkdir /mnt/sdcard2 0000 system system
     symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-    symlink /mnt/sdcard /sdcard
-    symlink /data/media /storage/sdcard1
+    symlink /mnt/sdcard2 /Device
+    symlink /sdcard /mnt/sdcard
 
     mkdir /carrier 0770 system system
 
@@ -49,6 +47,10 @@ on emmc-fs
     #------tombstones----------
     wait /dev/block/platform/msm_sdcc.1/by-name/tombstones
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/tombstones /tombstones nosuid nodev barrier=1
+  
+    #------sdcarddata----------
+    wait /dev/block/platform/msm_sdcc.1/by-name/sdcarddata
+    exec /system/bin/format_vfat
     
     #------carrier----------
     wait /dev/block/platform/msm_sdcc.1/by-name/carrier
@@ -204,6 +206,12 @@ on post-fs
 
 on post-fs-data
 
+    setprop vold.post_fs_data_done 1
+
+    # we will remap this as /mnt/sdcard2 with the sdcard fuse tool
+    mkdir /data/media 0775 media_rw media_rw
+    chown media_rw media_rw /data/media
+
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/hostapd 0770 wifi wifi	
@@ -272,8 +280,6 @@ on post-fs-data
 
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
-
-    setprop vold.post_fs_data_done 1
 
     #Create /data/data/media for SRS to be able to create a user config file
     mkdir /data/data/media 0770 media media
